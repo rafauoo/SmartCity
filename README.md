@@ -1,7 +1,7 @@
 ## 🚀 How to use
 
 ```sh
-expo-cli start --tunnel
+npm start
 ```
 
 ## 📝 Notes
