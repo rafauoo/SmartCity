@@ -1,6 +1,8 @@
 const COLORS = {
     white: "#ffffff",
-    blue: '#1651f5'
+    blue: '#1651f5',
+    yellow: '#c2a804',
+    green: '#217a04'
 }
 
 const FONT = {
