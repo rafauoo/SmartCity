@@ -1,8 +1,9 @@
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { useState, useEffect } from 'react'
 import { Stack, useRouter } from "expo-router";
-import { COLORS } from '../constants'
-import { TileGrid } from '../components'
+import { COLORS, FONT, icons } from '../constants'
+import { TileGrid, MenuButton } from '../components'
+import { supabase } from '../lib/supabase/supabase'
 
 
 const Home = () => {
@@ -11,12 +12,17 @@ const Home = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <Text>Left</Text>
+                    <MenuButton icon={icons.menu} />
                 ),
                 headerRight: () => (
-                    <Text>Right</Text>
+                    <MenuButton icon={icons.profile} />
                 ),
-                headerTitle: "",
+                headerTitle: "Smart City",
+                headerTitleStyle: {
+                    fontFamily: FONT.PoppinsBold,
+                    fontSize: 22,
+                    color: COLORS.blue
+                }
             }} />
             <ScrollView>
                 <TileGrid />
