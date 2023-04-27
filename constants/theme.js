@@ -1,9 +1,10 @@
 const COLORS = {
-    white: "#ffffff"
+    white: "#ffffff",
+    blue: '#1651f5'
 }
 
 const FONT = {
-
+    PoppinsBold: 'PoppinsBold',
 }
 
 const SIZES = {
