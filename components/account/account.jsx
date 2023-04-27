@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase/supabase'
 import { StyleSheet, View, Alert } from 'react-native'
+import { Redirect } from "expo-router";
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import styles from './account.style'

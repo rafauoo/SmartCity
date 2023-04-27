@@ -1,27 +1,34 @@
-import { View, Text } from 'react-native'
-import 'react-native-url-polyfill/auto'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { useState, useEffect } from 'react'
+import { Stack, useRouter } from "expo-router";
+import { COLORS, FONT, icons } from '../constants'
+import { TileGrid, MenuButton } from '../components'
 import { supabase } from '../lib/supabase/supabase'
-import Auth from '../components/auth/auth'
-import Account from '../components/account/account'
-import { Session } from '@supabase/supabase-js'
+
 
 const Home = () => {
-    const [session, setSession] = useState(null)
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session)
-        })
-
-        supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
-        })
-    }, [])
-
     return (
-        <View>
-            {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
-        </View>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
+            <Stack.Screen options={{
+                headerStyle: { backgroundColor: COLORS.white },
+                headerLeft: () => (
+                    <MenuButton icon={icons.menu} />
+                ),
+                headerRight: () => (
+                    <MenuButton icon={icons.profile} />
+                ),
+                headerTitle: "Smart City",
+                headerTitleStyle: {
+                    fontFamily: FONT.PoppinsBold,
+                    fontSize: 22,
+                    color: COLORS.blue
+                }
+            }} />
+            <ScrollView>
+                <TileGrid />
+            </ScrollView>
+        </SafeAreaView>
     )
 }
+
 export default Home;
