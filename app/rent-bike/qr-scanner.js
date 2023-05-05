@@ -42,15 +42,31 @@ const QRScanner = () => {
 
     const styles = StyleSheet.create({
         container: {
-            height: 100,
+            marginTop: '50%',
+            marginBottom: '50%',
+            width: '80%',
             flex: 1,
             backgroundColor: '#fff',
             alignItems: 'center',
+            alignSelf: 'center',
             justifyContent: 'center'
         }
     });
 
     return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
+        <Stack.Screen options={{
+            headerStyle: { backgroundColor: COLORS.white },
+            headerLeft: () => (
+                <MenuButton icon={icons.backArrow} onPress={() => {router.back()}}/>
+            ),
+            headerTitle: "Smart City",
+            headerTitleStyle: {
+                fontFamily: FONT.PoppinsBold,
+                fontSize: 22,
+                color: COLORS.blue
+            }
+        }} />
             <View style={styles.container}>
                 <BarCodeScanner
                     style={StyleSheet.absoluteFillObject}
@@ -58,6 +74,8 @@ const QRScanner = () => {
                 />
                 <StatusBar style="auto" />
             </View>
+            <View></View>
+        </SafeAreaView>
     )
 
 

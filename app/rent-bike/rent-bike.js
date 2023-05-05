@@ -8,16 +8,18 @@ import { TextInput } from 'react-native-gesture-handler';
 import styles from './rent-bike.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-function yesPressed() {
-    console.log('Yes Pressed')
-    router.push()
-}
+
 
 const rentBike = () => {
     const router = useRouter();
     const params = useSearchParams();
     const { code, other } = params;
     const [value, onChangeText] = useState('');
+    function yesPressed() {
+        console.log('Yes Pressed')
+        let time = new Date();
+        router.push({pathname: `/rent-bike/rental/${value}`, params: {time: time}})
+    }
     useEffect(() => {
         if (code) {
             onChangeText(code);
@@ -79,7 +81,7 @@ const rentBike = () => {
                     <Text style={styles.qrText}>Użyj kodu QR</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.rentalsButton}>
+                <TouchableOpacity style={styles.rentalsButton} onPress={() => router.push(`/rent-bike/rent-list`)}>
                     <Text style={styles.rentalsText}>Wypożyczenia</Text>
                 </TouchableOpacity>
             </ScrollView>
