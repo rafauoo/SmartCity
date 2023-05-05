@@ -6,6 +6,7 @@ import car from "../assets/icons/car.png"
 import help from "../assets/icons/help.png"
 import menu from "../assets/icons/menu.png"
 import profile from "../assets/icons/profile.png"
+import backArrow from "../assets/icons/left-arrow.png"
 
 export default {
     bike,
@@ -15,5 +16,6 @@ export default {
     car,
     help,
     menu,
-    profile
+    profile,
+    backArrow
 };

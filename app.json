@@ -5,6 +5,14 @@
       "bundler": "metro"
     },
     "name": "SmartCity",
-    "slug": "SmartCity"
+    "slug": "SmartCity",
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      ]
+    ]
   }
 }
