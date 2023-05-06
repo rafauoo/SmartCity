@@ -18,7 +18,7 @@ const rentBike = () => {
     function yesPressed() {
         console.log('Yes Pressed')
         let time = new Date();
-        router.push({pathname: `/rent-bike/rental/${value}`, params: {time: time}})
+        router.push({pathname: `/rent-bike/rental/${value}`, params: {time: time, code: value}})
     }
     useEffect(() => {
         if (code) {
