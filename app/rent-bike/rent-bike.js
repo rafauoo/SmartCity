@@ -1,6 +1,6 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
 import { useState, useEffect } from 'react'
-import { Stack, useRouter, useNavigation, useSearchParams} from "expo-router";
+import { Stack, useRouter, useNavigation, useSearchParams } from "expo-router";
 import { COLORS, FONT, icons } from '../../constants'
 import { TileGrid, MenuButton } from '../../components'
 import { supabase } from '../../lib/supabase/supabase'
@@ -18,7 +18,7 @@ const rentBike = () => {
     function yesPressed() {
         console.log('Yes Pressed')
         let time = new Date();
-        router.push({pathname: `/rent-bike/rental/${value}`, params: {time: time, code: value}})
+        router.push({ pathname: `/rent-bike/rental/${value}`, params: { time: time, code: value } })
     }
     useEffect(() => {
         if (code) {
@@ -30,7 +30,7 @@ const rentBike = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.back()}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -42,42 +42,43 @@ const rentBike = () => {
                     color: COLORS.blue
                 }
             }} />
-            
+
             <ScrollView>
                 <View style={styles.numberContainer}>
                     <Text style={styles.numberText}>Wprowadź numer roweru:</Text>
                     <TextInput
-                    editable
-                    keyboardType='numeric'
-                    multiline
-                    numberOfLines={1}
-                    maxLength={5}
-                    placeholder={"00000"}
-                    onChangeText={text => onChangeText(text)}
-                    value={value}
-                    style={styles.numberInput}
+                        editable
+                        keyboardType='numeric'
+                        numberOfLines={1}
+                        maxLength={5}
+                        placeholder={"00000"}
+                        onChangeText={text => onChangeText(text)}
+                        value={value}
+                        style={styles.numberInput}
                     />
                 </View>
                 <TouchableOpacity style={styles.acceptButton} onPress={() => {
                     if (value) {
-                    Alert.alert('Wypożyczenie', `Czy na pewno chcesz wypożyczyć rower o numerze ${value}?`,
-                        [
-                        { text: 'Nie', 
-                          onPress: () => {},
-                          style: 'destructive'
-                        },
-                        {
-                          text: 'Tak',
-                          onPress: () => yesPressed(),
-                          style: 'default',
-                        },
-                      ],
-                      { cancelable: true }) }
+                        Alert.alert('Wypożyczenie', `Czy na pewno chcesz wypożyczyć rower o numerze ${value}?`,
+                            [
+                                {
+                                    text: 'Nie',
+                                    onPress: () => { },
+                                    style: 'destructive'
+                                },
+                                {
+                                    text: 'Tak',
+                                    onPress: () => yesPressed(),
+                                    style: 'default',
+                                },
+                            ],
+                            { cancelable: true })
+                    }
                 }}>
                     <Text style={styles.acceptText}>Wypożycz</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.qrButton} onPress={()=> {router.push(`/rent-bike/qr-scanner`)}}>
+                <TouchableOpacity style={styles.qrButton} onPress={() => { router.push(`/rent-bike/qr-scanner`) }}>
                     <Text style={styles.qrText}>Użyj kodu QR</Text>
                 </TouchableOpacity>
 

@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
-import { Alert, View } from 'react-native'
 import { supabase } from '../../lib/supabase/supabase'
 import { Button, Input } from 'react-native-elements'
 import styles from "./auth.style"
-
+import { Alert, View, Text, SafeAreaView, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native'
+import { icons } from '../../constants'
+import { useRouter } from 'expo-router'
 function Auth() {
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [birth_date, setBrith_date] = useState('')
     const [loading, setLoading] = useState(false)
+    const myDate = new Date();
+    const router = useRouter();
 
     async function signInWithEmail() {
         setLoading(true)
@@ -18,49 +25,42 @@ function Auth() {
 
         if (error) Alert.alert(error.message)
         setLoading(false)
+        if (!error) router.push('/home');
     }
-
-    async function signUpWithEmail() {
-        setLoading(true)
-        const { error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-        })
-
-        if (error) Alert.alert(error.message)
-        setLoading(false)
-    }
-
     return (
         <View style={styles.container}>
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Input
-                    label="Email"
-                    leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-                    onChangeText={(text) => setEmail(text)}
+            <View style={styles.verticallySpaced}>
+                <Image source={icons.email} style={styles.padlock} />
+                <TextInput
+                    label="hasło"
+                    editable
+                    keyboardType='email-address'
+                    numberOfLines={1}
+                    placeholder={"e-mail"}
+                    onChangeText={text => setEmail(text)}
                     value={email}
-                    placeholder="email@address.com"
-                    autoCapitalize={'none'}
+                    style={styles.input}
                 />
             </View>
             <View style={styles.verticallySpaced}>
-                <Input
-                    label="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={(text) => setPassword(text)}
+                <Image source={icons.padlock} style={styles.padlock} />
+                <TextInput
+                    label="hasło"
+                    editable
+                    numberOfLines={1}
+                    placeholder={"hasło"}
+                    onChangeText={text => setPassword(text)}
                     value={password}
-                    secureTextEntry={true}
-                    placeholder="Password"
-                    autoCapitalize={'none'}
+                    style={styles.input}
                 />
             </View>
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
-            </View>
-            <View style={styles.verticallySpaced}>
-                <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
-            </View>
-        </View>
+            <TouchableOpacity style={[styles.loginButton]} onPress={() => signInWithEmail()}>
+                <Text style={styles.loginText}>Zaloguj</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.registerButton]} onPress={() => router.push('/register')}>
+                <Text style={styles.registerText}>Zarejestruj</Text>
+            </TouchableOpacity>
+        </View >
     )
 }
 

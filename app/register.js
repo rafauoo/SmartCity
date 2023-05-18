@@ -4,28 +4,32 @@ import { useState, useEffect } from 'react'
 import { Stack, useRouter } from "expo-router";
 import { Redirect } from "expo-router";
 import { supabase } from '../lib/supabase/supabase'
-import Auth from '../components/auth/auth'
+import AuthRegister from '../components/auth/register'
 import Account from '../components/account/account'
 import { Session } from '@supabase/supabase-js'
 import { COLORS, FONT, icons } from '../constants';
 import { MenuButton } from '../components';
 
-const Login = () => {
 
+const Register = () => {
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerTitle: "Smart City",
-                headerBackVisible: false,
+                headerLeft: () => (
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
+                ),
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,
                     fontSize: 22,
                     color: COLORS.blue
                 }
             }} />
-            <Auth />
+            <AuthRegister />
         </SafeAreaView>
     )
 }
-export default Login;
+
+export default Register;

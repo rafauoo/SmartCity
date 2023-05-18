@@ -7,6 +7,8 @@ import help from "../assets/icons/help.png"
 import menu from "../assets/icons/menu.png"
 import profile from "../assets/icons/profile.png"
 import backArrow from "../assets/icons/left-arrow.png"
+import padlock from "../assets/icons/padlock.png"
+import email from "../assets/icons/email.png"
 
 export default {
     bike,
@@ -17,5 +19,7 @@ export default {
     help,
     menu,
     profile,
-    backArrow
+    backArrow,
+    padlock,
+    email
 };
