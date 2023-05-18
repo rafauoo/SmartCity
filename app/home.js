@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabase/supabase'
 
 
 const Home = () => {
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
             <Stack.Screen options={{
@@ -15,7 +16,7 @@ const Home = () => {
                     <MenuButton icon={icons.menu} />
                 ),
                 headerRight: () => (
-                    <MenuButton icon={icons.profile} />
+                    <MenuButton icon={icons.profile} onPress={() => { router.push('profile') }} />
                 ),
                 headerTitle: "Smart City",
                 headerTitleStyle: {
