@@ -1,4 +1,4 @@
-import { Alert, View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
+import { Alert, View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { useState, useEffect } from 'react'
 import { Stack, useRouter, useNavigation, useSearchParams } from "expo-router";
 import { COLORS, FONT, icons } from '../../constants'
@@ -7,6 +7,7 @@ import { supabase } from '../../lib/supabase/supabase'
 import { TextInput } from 'react-native-gesture-handler';
 import styles from './rent-list.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { images } from '../../constants'
 import { fetchRentals } from '../../hook';
 
 
@@ -64,6 +65,7 @@ const rentList = () => {
                     {data && data.map((item, index) => (
                         <View key={index} style={styles.rentBox}>
                             <TouchableOpacity>
+                                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
                                 <Text style={styles.objectID}>{item.bike_id}</Text>
                                 <Text style={styles.time}>{item.time_rented}</Text>
                                 <Text style={styles.time}>{item.time_returned}</Text>

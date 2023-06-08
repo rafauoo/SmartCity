@@ -30,7 +30,15 @@ const styles = StyleSheet.create({
         marginRight: 20,
         color: COLORS.blue,
         fontFamily: FONT.PoppinsLight
-    }
+    },
+    bikeImg: {
+        position: 'absolute',
+        resizeMode: 'contain',
+        height: 100,
+        width: 100,
+        marginLeft: 20,
+        marginTop: 50,
+    },
 })
 
 export default styles;
