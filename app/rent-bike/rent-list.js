@@ -5,7 +5,7 @@ import { COLORS, FONT, icons } from '../../constants'
 import { TileGrid, MenuButton } from '../../components'
 import { supabase } from '../../lib/supabase/supabase'
 import { TextInput } from 'react-native-gesture-handler';
-import styles from './rent-bike.style';
+import styles from './rent-list.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { fetchRentals } from '../../hook';
 
@@ -60,9 +60,17 @@ const rentList = () => {
             }} />
 
             <ScrollView>
-            {data && data.map((item, index) => (
-                <Text key={index}>{item.bike_id}{item.time_rented}{item.time_returned}</Text>
-            ))}
+                <View style={styles.listContainer}>
+                    {data && data.map((item, index) => (
+                        <View key={index} style={styles.rentBox}>
+                            <TouchableOpacity>
+                                <Text style={styles.objectID}>{item.bike_id}</Text>
+                                <Text style={styles.time}>{item.time_rented}</Text>
+                                <Text style={styles.time}>{item.time_returned}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    ))}
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
