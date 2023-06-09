@@ -49,10 +49,10 @@ const rentCar = () => {
                     <Text style={styles.numberText}>Wprowadź numer rejestracyjny samochodu:</Text>
                     <TextInput
                         editable
-                        keyboardType='text'
+                        keyboardType='default'
                         numberOfLines={1}
-                        maxLength={5}
-                        placeholder={"00000"}
+                        maxLength={7}
+                        placeholder={"0000000"}
                         onChangeText={text => onChangeText(text)}
                         value={value}
                         style={styles.numberInput}
@@ -79,11 +79,11 @@ const rentCar = () => {
                     <Text style={styles.acceptText}>Wypożycz</Text>
                 </TouchableOpacity>
 
-                {/* <TouchableOpacity style={styles.qrButton} onPress={() => { router.push(`/rent-bike/qr-scanner`) }}>
+                <TouchableOpacity style={styles.qrButton} onPress={() => { router.push(`/rent-car/qr-scanner`) }}>
                     <Text style={styles.qrText}>Użyj kodu QR</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
 
-                <TouchableOpacity style={styles.rentalsButton} onPress={() => router.push(`/rent-bike/rent-list`)}>
+                <TouchableOpacity style={styles.rentalsButton} onPress={() => router.push(`/rent-car/rent-list`)}>
                     <Text style={styles.rentalsText}>Wypożyczenia</Text>
                 </TouchableOpacity>
             </ScrollView>

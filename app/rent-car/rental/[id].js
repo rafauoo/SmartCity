@@ -49,13 +49,13 @@ const CarRental = () => {
                 },
             }} />
 
-            <View style={styles.bikeImgContainer}>
-                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
-                <Text style={styles.bikeNumber}>{params.code}</Text>
+            <View style={styles.carImgContainer}>
+                <Image source={images.carImg} style={styles.carImg}></Image>
+                <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
                 <TouchableOpacity style={styles.buttonReturn}>
-                    <Text style={styles.buttonReturnText}>Zwróć rower</Text>
+                    <Text style={styles.buttonReturnText}>Zwróć samochód</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonHelp}>
                     <Text style={styles.buttonHelpText}>Pomoc</Text>

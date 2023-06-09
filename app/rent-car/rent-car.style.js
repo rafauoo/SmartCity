@@ -15,8 +15,10 @@ const styles = StyleSheet.create({
         marginTop: 30,
         alignSelf: 'center',
         fontSize: 50,
-        letterSpacing: 20,
-        marginLeft: 20,
+        width: 187, // hardcoded, moze ktos wie jak to sensownie zrobic
+        //overflow: hidden,
+        letterSpacing: 1,
+        marginLeft: 0,
         color: COLORS.blue
     },
     acceptButton: {
