@@ -33,14 +33,39 @@ const styles = StyleSheet.create({
     },
     help: {
         backgroundColor: COLORS.blue,
-        margin: 40,
-        padding: 40,
+        margin: 30,
+        padding: 20,
         borderRadius: 16,
     },
-    image: {
-        width: 200,
-        height: 200,
+    textHeader: {
+        //textAlign: left, dac na lewo jakos bo zle wyglada
+        color: COLORS.blue,
+        fontFamily: FONT.PoppinsBold,
+        fontSize: 20,
     },
+
+    header: {
+        backgroundColor: COLORS.white,
+        margin: 10,
+        width: 350,
+        height: 40,
+        fontSize: 20,
+        borderRadius: 8,
+        fontFamily: FONT.PoppinsLight,
+        marginBottom: 30
+    },
+
+    mess: {
+        backgroundColor: COLORS.white,
+        fontFamily: FONT.PoppinsLight,
+        margin: 10,
+        width: 350,
+        height: 450,
+        fontSize: 20,
+        borderRadius: 8,
+        textAlignVertical: 'top'
+    }
+
 });
 
 export default styles;

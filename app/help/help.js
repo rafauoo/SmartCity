@@ -3,7 +3,7 @@ import {
     SafeAreaView,
     ScrollView,
     TouchableOpacity,
-    Image,
+    TextInput,
     View,
 } from "react-native";
 import { useState } from "react";
@@ -12,11 +12,14 @@ import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
 import styles from "./help.style";
 
-const ticket = () => {
+const help = () => {
     const router = useRouter();
     const { type } = useSearchParams();
     const [clipDate, setClipDate] = useState();
+    const [header, setHeader] = useState('');
+    const [message, setMessage] = useState('');
 
+    console.log(type);
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
             <Stack.Screen
@@ -41,8 +44,7 @@ const ticket = () => {
             />
 
             <ScrollView contentContainerStyle={styles.root}>
-                <View style={styles.ticket}>
-                    <Image source={icons.ticket} style={styles.image} />
+                <View style={styles.help}>
                     <Text style={styles.text}>{type}</Text>
                     {clipDate && (
                         <Text style={[styles.text, styles.textSmall]}>
@@ -50,17 +52,27 @@ const ticket = () => {
                         </Text>
                     )}
                 </View>
+
                 {!clipDate && (
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => setClipDate(new Date())}
-                    >
-                        <Text>Skasuj bilet</Text>
-                    </TouchableOpacity>
+                    <>
+                        <Text style={styles.textHeader}>Nazwij zgłoszenie
+                        </Text>
+                        <TextInput style={styles.header} ></TextInput>
+
+                        <Text style={styles.textHeader}>Wiadomość</Text>
+                        <TextInput style={styles.mess} multiline={true}
+                            numberOfLines={4}></TextInput>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => setClipDate(new Date())}
+                        >
+                            <Text>Wyślij</Text>
+                        </TouchableOpacity>
+                    </>
                 )}
             </ScrollView>
         </SafeAreaView>
     );
 };
 
-export default ticket;
+export default help;
