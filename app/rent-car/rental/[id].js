@@ -11,7 +11,7 @@ import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
 
-const BikeRental = () => {
+const CarRental = () => {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const params = useSearchParams();
@@ -30,13 +30,13 @@ const BikeRental = () => {
             setMinutes(diffMinutes);
         }, 1000);
         return () => clearInterval(intervalId);
-      }, [params]);
+    }, [params]);
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/home')}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -64,7 +64,7 @@ const BikeRental = () => {
             <View style={styles.rentInfoContainer}>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoTimeText}>Czas wypożyczenia</Text>
-                    <Text style={styles.infoTime}>{zeroPad(minutes, 2)}:{zeroPad(seconds,2)}</Text>
+                    <Text style={styles.infoTime}>{zeroPad(minutes, 2)}:{zeroPad(seconds, 2)}</Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoDateText}>Data wypożyczenia</Text>
@@ -81,4 +81,4 @@ const BikeRental = () => {
 
 }
 
-export default BikeRental;
+export default CarRental;
