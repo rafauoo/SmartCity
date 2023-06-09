@@ -63,8 +63,8 @@ const BikeRentalNotActive = () => {
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoTimeText}>Czas wypożyczenia</Text>
                     <Text style={styles.infoTime}>
-                        {msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).minutes}:
-                        {msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).seconds}
+                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).minutes,2)}:
+                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).seconds,2)}
                     </Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
