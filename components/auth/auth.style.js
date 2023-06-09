@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         flexWrap: 'nowrap',
         flexDirection: 'row',
         marginTop: 30,
+        alignItems: 'center',
         borderRadius: 10,
         borderColor: COLORS.blue,
         borderWidth: 1,
@@ -67,6 +68,24 @@ const styles = StyleSheet.create({
         fontFamily: FONT.PoppinsLight,
         color: COLORS.blue,
     },
+    pickDateButton: {
+        backgroundColor: COLORS.blue,
+        width: 100,
+        marginLeft: 20,
+        height: 30,
+        alignSelf: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        borderColor: COLORS.blue,
+        borderWidth: 2,
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    pickDateText: {
+        fontSize: 15,
+        fontFamily: FONT.PoppinsLight,
+        color: COLORS.white,
+    }
 })
 
 export default styles;

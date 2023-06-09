@@ -37,6 +37,7 @@ function Auth() {
                     keyboardType='email-address'
                     numberOfLines={1}
                     placeholder={"e-mail"}
+                    placeholderTextColor={'rgba(13, 82, 159, 0.6)'}
                     onChangeText={text => setEmail(text)}
                     value={email}
                     style={styles.input}
@@ -49,6 +50,7 @@ function Auth() {
                     editable
                     numberOfLines={1}
                     placeholder={"hasło"}
+                    placeholderTextColor={'rgba(13, 82, 159, 0.6)'}
                     onChangeText={text => setPassword(text)}
                     value={password}
                     style={styles.input}
