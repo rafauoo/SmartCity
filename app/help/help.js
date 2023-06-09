@@ -48,7 +48,7 @@ const help = () => {
                     <Text style={styles.text}>{type}</Text>
                     {clipDate && (
                         <Text style={[styles.text, styles.textSmall]}>
-                            Skasowano {"\n" + clipDate.toLocaleString()}
+                            Wysłano {"\n" + clipDate.toLocaleString()}
                         </Text>
                     )}
                 </View>
