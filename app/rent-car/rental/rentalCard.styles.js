@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native'
 import { COLORS, FONT } from '../../../constants'
 
 const styles = StyleSheet.create({
-    bikeImg: {
+    carImg: {
         resizeMode: 'contain',
         height: 150,
         width: 150,
         marginLeft: 25,
     },
-    bikeNumber: {
+    carNumber: {
         alignSelf: 'center',
         marginTop: -10,
         fontSize: 30,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         fontFamily: FONT.PoppinsLight,
         color: COLORS.blue
     },
-    bikeImgContainer: {
+    carImgContainer: {
         height: 200,
         width: 200,
         marginTop: 40,

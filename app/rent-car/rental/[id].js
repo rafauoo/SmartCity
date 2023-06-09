@@ -12,7 +12,7 @@ import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
 import { fetchBikeReturn } from '../../../hook';
 
-const BikeRental = () => {
+const CarRental = () => {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const params = useSearchParams();
@@ -29,7 +29,7 @@ const BikeRental = () => {
             setMinutes(diffMinutes);
         }, 1000);
         return () => clearInterval(intervalId);
-      }, [params]);
+    }, [params]);
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#e8e3e3' }}>
             <Stack.Screen options={{
@@ -48,9 +48,9 @@ const BikeRental = () => {
                 },
             }} />
 
-            <View style={styles.bikeImgContainer}>
-                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
-                <Text style={styles.bikeNumber}>{params.code}</Text>
+            <View style={styles.carImgContainer}>
+                <Image source={images.carImg} style={styles.carImg}></Image>
+                <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
                 <TouchableOpacity style={styles.buttonReturn} onPress={async () => {
@@ -72,7 +72,7 @@ const BikeRental = () => {
             <View style={styles.rentInfoContainer}>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoTimeText}>Czas wypożyczenia</Text>
-                    <Text style={styles.infoTime}>{zeroPad(minutes, 2)}:{zeroPad(seconds,2)}</Text>
+                    <Text style={styles.infoTime}>{zeroPad(minutes, 2)}:{zeroPad(seconds, 2)}</Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoDateText}>Data wypożyczenia</Text>
@@ -89,4 +89,4 @@ const BikeRental = () => {
 
 }
 
-export default BikeRental;
+export default CarRental;

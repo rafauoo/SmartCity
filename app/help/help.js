@@ -1,21 +1,21 @@
-import { Text, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import { useState, useEffect } from "react";
-import { Stack, useRouter } from "expo-router";
+import {
+    Text,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+    Image,
+    View,
+} from "react-native";
+import { useState } from "react";
+import { Stack, useRouter, useSearchParams } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
-import { supabase } from "../../lib/supabase/supabase";
-import styles from "./tickets.style";
+import styles from "./help.style";
 
-const tickets = ({ }) => {
+const ticket = () => {
     const router = useRouter();
-    const [ticketTypes, setTicketTypes] = useState([]);
-
-    useEffect(() => {
-        supabase
-            .from("ticket_type")
-            .select("type_name")
-            .then(({ data }) => setTicketTypes(data));
-    }, []);
+    const { type } = useSearchParams();
+    const [clipDate, setClipDate] = useState();
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
@@ -41,24 +41,26 @@ const tickets = ({ }) => {
             />
 
             <ScrollView contentContainerStyle={styles.root}>
-                <Text style={styles.title}>Wybierz rodzaj biletu</Text>
-                {ticketTypes.map((ticket) => (
+                <View style={styles.ticket}>
+                    <Image source={icons.ticket} style={styles.image} />
+                    <Text style={styles.text}>{type}</Text>
+                    {clipDate && (
+                        <Text style={[styles.text, styles.textSmall]}>
+                            Skasowano {"\n" + clipDate.toLocaleString()}
+                        </Text>
+                    )}
+                </View>
+                {!clipDate && (
                     <TouchableOpacity
                         style={styles.button}
-                        key={ticket.type_name}
-                        onPress={() =>
-                            router.push({
-                                pathname: "/tickets/ticket",
-                                params: { type: ticket.type_name },
-                            })
-                        }
+                        onPress={() => setClipDate(new Date())}
                     >
-                        <Text>{ticket.type_name}</Text>
+                        <Text>Skasuj bilet</Text>
                     </TouchableOpacity>
-                ))}
+                )}
             </ScrollView>
         </SafeAreaView>
     );
 };
 
-export default tickets;
+export default ticket;
