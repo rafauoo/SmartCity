@@ -1,4 +1,5 @@
 
 import fetchRentals from "./fetchRentals";
+import fetchRentBike from "./fetchRentBike"
 
-export { fetchRentals}
+export { fetchRentals, fetchRentBike }

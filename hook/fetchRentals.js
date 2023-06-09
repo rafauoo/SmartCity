@@ -19,10 +19,12 @@ async function getBikeID(city_service_object_id) {
 }
 
 async function fetchBikeData(rental_data) {
+    console.log(rental_data)
     const bike_id = await getBikeID(rental_data.city_service_object_id)
     const time_rented = await getBikeTime('godzina wypożyczenia roweru', rental_data);
     const time_returned = await getBikeTime('godzina zwrotu roweru', rental_data);
-    return { "bike_id": bike_id.value, "time_rented": time_rented.value, "time_returned": time_returned.value}
+    if (!time_returned) return { "rental_id": rental_data.rental_id, "bike_id": bike_id.value, "time_rented": time_rented.value }
+    return { "rental_id": rental_data.rental_id, "bike_id": bike_id.value, "time_rented": time_rented.value, "time_returned": time_returned.value}
 }
 
 async function fetchRentals (userId) {
@@ -34,6 +36,7 @@ async function fetchRentals (userId) {
     console.error('Wystąpił błąd podczas pobierania wypożyczeń:', error);
     return [];
   }
+  console.log("AAAAAA")
   console.log(data)
   const processedData = [];
 

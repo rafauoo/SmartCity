@@ -7,6 +7,8 @@ import { supabase } from '../../lib/supabase/supabase'
 import { TextInput } from 'react-native-gesture-handler';
 import styles from './rent-bike.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { fetchBikeAvailable } from '../../hook';
+import { fetchRentBike } from '../../hook';
 
 
 
@@ -15,10 +17,29 @@ const rentBike = () => {
     const params = useSearchParams();
     const { code, other } = params;
     const [value, onChangeText] = useState('');
-    function yesPressed() {
-        console.log('Yes Pressed')
-        let time = new Date();
-        router.push({ pathname: `/rent-bike/rental/${value}`, params: { time: time, code: value } })
+    async function yesPressed() {
+        const { data, error } = await supabase.auth.refreshSession()
+        const { session, user } = data
+        const rentalID = await fetchRentBike(value, session.user.id)
+        if (rentalID)
+        {
+            console.log('Yes Pressed')
+            let time = new Date();
+            console.log('Bike rented')
+            router.push({ pathname: `/rent-bike/rental/${rentalID}`, params: { time: time, code: value } })
+        }
+        else {
+            console.log("Bike not available")
+            Alert.alert('Błąd','Nie można wypożyczyć roweru o tym numerze', [
+            {
+                text: 'Ok',
+                onPress: () => {},
+                style: 'default',
+            },
+        ],
+        { cancelable: true })
+        }
+
     }
     useEffect(() => {
         if (code) {

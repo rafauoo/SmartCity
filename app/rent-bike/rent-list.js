@@ -28,12 +28,14 @@ const rentList = () => {
         supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
             if (session) {
+                if (!data) {
                 const fetchData = async () => {
                   const rentals = await fetchRentals(session.user.id);
                   setData(rentals);
                 };
                 fetchData();
               }
+            }
         })
         setLoading(false)
     }, [])
@@ -62,14 +64,31 @@ const rentList = () => {
 
             <ScrollView>
                 <View style={styles.listContainer}>
-                    {data && data.map((item, index) => (
+                    {data && data.slice(0).reverse().map((item, index) => (
                         <View key={index} style={styles.rentBox}>
-                            <TouchableOpacity>
+                            {item.time_returned ?                             
+                                <TouchableOpacity onPress={() => {
+                                        router.push({ pathname: `/rent-bike/notActiveRental/${item.rental_id}`,
+                                        params: {time: item.time_rented, code: item.bike_id}})}
+                                    }>
+                                    <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                    <Text style={styles.objectID}>{item.bike_id}</Text>
+                                    <Text style={styles.time}>{item.time_rented}</Text>
+                                    <Text style={styles.time}>{item.time_returned}</Text>
+                                </TouchableOpacity> 
+                            :
+                                // Rower nie zwrócony
+                                <TouchableOpacity onPress={() => {
+                                    router.push({ pathname: `/rent-bike/rental/${item.rental_id}`,
+                                    params: {time: item.time_rented, code: item.bike_id}})}
+                                }>
                                 <Image source={images.bikeImg} style={styles.bikeImg}></Image>
                                 <Text style={styles.objectID}>{item.bike_id}</Text>
                                 <Text style={styles.time}>{item.time_rented}</Text>
-                                <Text style={styles.time}>{item.time_returned}</Text>
-                            </TouchableOpacity>
+                                <Text style={styles.time}>WYPOŻYCZENIE</Text>
+                                <Text style={styles.time}>AKTYWNE</Text>
+                                </TouchableOpacity>
+                            }
                         </View>
                     ))}
                 </View>
