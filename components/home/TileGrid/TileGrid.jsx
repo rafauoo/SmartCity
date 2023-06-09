@@ -44,7 +44,7 @@ export default function TileGrid() {
                 title="Pomoc"
                 icon={icons.help}
                 color={COLORS.blue}
-            />
+                onPress={() => router.push('/help')} />
         </View>
     );
 }

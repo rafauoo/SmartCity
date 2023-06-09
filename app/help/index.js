@@ -4,18 +4,11 @@ import { Stack, useRouter } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
 import { supabase } from "../../lib/supabase/supabase";
-import styles from "./tickets.style";
+import styles from "./help.style";
 
-const tickets = ({ }) => {
+const helper = ({ }) => {
     const router = useRouter();
-    const [ticketTypes, setTicketTypes] = useState([]);
-
-    useEffect(() => {
-        supabase
-            .from("ticket_type")
-            .select("type_name")
-            .then(({ data }) => setTicketTypes(data));
-    }, []);
+    const [helpTypes, setHelpType] = useState([{ "type_name": "Zgłoś błąd" }, { "type_name": "Odwołaj się od mandatu" }, { "type_name": "Zgłoś usterkę w wypożyczanym pojeździe" }, { "type_name": "Pomoc z wypożyczeniem" }, { "type_name": "Kontakt" }]);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
@@ -41,24 +34,25 @@ const tickets = ({ }) => {
             />
 
             <ScrollView contentContainerStyle={styles.root}>
-                <Text style={styles.title}>Wybierz rodzaj biletu</Text>
-                {ticketTypes.map((ticket) => (
-                    <TouchableOpacity
+                <Text style={styles.title}>Jakiej pomocy potrzebujesz?</Text>
+                {helpTypes.map((help) => (
+
+                    < TouchableOpacity
                         style={styles.button}
-                        key={ticket.type_name}
+                        key={help.type_name}
                         onPress={() =>
                             router.push({
-                                pathname: "/tickets/ticket",
-                                params: { type: ticket.type_name },
+                                pathname: "/help/help",
+                                params: { type: help.type_name },
                             })
                         }
                     >
-                        <Text>{ticket.type_name}</Text>
+                        <Text>{help.type_name}</Text>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 };
 
-export default tickets;
+export default helper;

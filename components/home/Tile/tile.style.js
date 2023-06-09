@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     tileImage: {
         width: '50%',
         height: '50%',
-        marginTop: 15,
+        marginTop: 22,
         marginBottom: 30,
         alignSelf: 'center',
         borderTopLeftRadius: 8,
