@@ -68,8 +68,9 @@ const rentList = () => {
                         <View key={index} style={styles.rentBox}>
                             {item.time_returned ?                             
                                 <TouchableOpacity onPress={() => {
+                                        const date_rented = new Date(item.time_rented)
                                         router.push({ pathname: `/rent-bike/notActiveRental/${item.rental_id}`,
-                                        params: {time: item.time_rented, code: item.bike_id}})}
+                                        params: {time: date_rented, code: item.bike_id, rental_id: item.rental_id}})}
                                     }>
                                     <Image source={images.bikeImg} style={styles.bikeImg}></Image>
                                     <Text style={styles.objectID}>{item.bike_id}</Text>
@@ -79,8 +80,9 @@ const rentList = () => {
                             :
                                 // Rower nie zwrócony
                                 <TouchableOpacity onPress={() => {
+                                    const date_rented = new Date(item.time_rented)
                                     router.push({ pathname: `/rent-bike/rental/${item.rental_id}`,
-                                    params: {time: item.time_rented, code: item.bike_id}})}
+                                    params: {time: date_rented, code: item.bike_id, rental_id: item.rental_id}})}
                                 }>
                                 <Image source={images.bikeImg} style={styles.bikeImg}></Image>
                                 <Text style={styles.objectID}>{item.bike_id}</Text>

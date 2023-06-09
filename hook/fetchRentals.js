@@ -23,6 +23,7 @@ async function fetchBikeData(rental_data) {
     const bike_id = await getBikeID(rental_data.city_service_object_id)
     const time_rented = await getBikeTime('godzina wypożyczenia roweru', rental_data);
     const time_returned = await getBikeTime('godzina zwrotu roweru', rental_data);
+    console.log(time_rented.value)
     if (!time_returned) return { "rental_id": rental_data.rental_id, "bike_id": bike_id.value, "time_rented": time_rented.value }
     return { "rental_id": rental_data.rental_id, "bike_id": bike_id.value, "time_rented": time_rented.value, "time_returned": time_returned.value}
 }

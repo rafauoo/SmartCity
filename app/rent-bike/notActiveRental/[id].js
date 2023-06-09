@@ -26,7 +26,7 @@ const BikeRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/home')}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/rent-bike/rent-list')}}/>
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />

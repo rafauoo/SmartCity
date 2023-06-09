@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList, Alert } from 'react-native'
 import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native';
 import { Stack, useRouter, useSearchParams } from "expo-router";
@@ -10,6 +10,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
+import { fetchBikeReturn } from '../../../hook';
 
 const BikeRental = () => {
     const [seconds, setSeconds] = useState(0);
@@ -24,8 +25,6 @@ const BikeRental = () => {
             const diffMilliseconds = Math.abs(now.getTime() - startDate.getTime());
             const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
             const diffSeconds = Math.floor((diffMilliseconds - (diffMinutes * 1000 * 60)) / 1000);
-
-            console.log(`Time difference: ${diffMinutes} minutes and ${diffSeconds} seconds`);
             setSeconds(diffSeconds);
             setMinutes(diffMinutes);
         }, 1000);
@@ -36,7 +35,7 @@ const BikeRental = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/home')}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/rent-bike/rent-list')}}/>
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -54,7 +53,16 @@ const BikeRental = () => {
                 <Text style={styles.bikeNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
-                <TouchableOpacity style={styles.buttonReturn}>
+                <TouchableOpacity style={styles.buttonReturn} onPress={async () => {
+                    const returnedProperly = await fetchBikeReturn(params.rental_id, params.code)
+                    console.log(returnedProperly)
+                    if (returnedProperly)
+                        router.push({ pathname: `/rent-bike/notActiveRental/${params.rental_id}`,
+                        params: {time_returned: returnedProperly, code: params.code, rental_id: params.rental_id}})
+                    else {
+                        Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem roweru')
+                    }
+                }}>
                     <Text style={styles.buttonReturnText}>Zwróć rower</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonHelp}>

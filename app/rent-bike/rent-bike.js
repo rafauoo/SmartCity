@@ -20,13 +20,14 @@ const rentBike = () => {
     async function yesPressed() {
         const { data, error } = await supabase.auth.refreshSession()
         const { session, user } = data
-        const rentalID = await fetchRentBike(value, session.user.id)
-        if (rentalID)
+        const rentData = await fetchRentBike(value, session.user.id)
+        if (rentData)
         {
             console.log('Yes Pressed')
-            let time = new Date();
             console.log('Bike rented')
-            router.push({ pathname: `/rent-bike/rental/${rentalID}`, params: { time: time, code: value } })
+            console.log(rentData.insertedRentHour)
+            router.push({ pathname: `/rent-bike/rental/${rentData.rental_id.rental_id}`,
+             params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id} })
         }
         else {
             console.log("Bike not available")

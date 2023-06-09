@@ -14,7 +14,7 @@ async function insertRent (serviceId, userId) {
     if (!rental_id) return null;
     console.log(rental_id)
     const insertedRentHour = await insertRentHour(rental_id.rental_id)
-    if (insertedRentHour) return rental_id.rental_id;
+    if (insertedRentHour) return { rental_id, insertedRentHour };
     return null;
 }
 
@@ -29,12 +29,15 @@ async function insertRental (serviceId, userId) {
 }
 
 async function insertRentHour (rental_id) {
+    let time = new Date();
+    console.log("CZAS:")
+    console.log(time)
     const { data, error } = await supabase
     .from('rental_object_data_value')
     .insert([
-        { data_name: 'godzina wypożyczenia roweru', rental_id: rental_id, value: 'tak' }
+        { data_name: 'godzina wypożyczenia roweru', rental_id: rental_id, value: time }
     ])
-    if (!error) return true;
+    if (!error) return time;
     return null;
 }
 
@@ -52,6 +55,7 @@ async function fetchRentBike (bikeId, userId) {
         return false;
     }
     const insertedProperly = await insertRent(serviceId.service_id, userId)
+    console.log(insertedProperly)
     return insertedProperly;
 };
 
