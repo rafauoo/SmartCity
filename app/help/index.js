@@ -8,7 +8,7 @@ import styles from "./help.style";
 
 const helper = ({ }) => {
     const router = useRouter();
-    const [helpTypes, setHelpType] = useState([{ "type_name": "Zgłoś błąd" }, { "type_name": "Odwołaj się od mandatu" }, { "type_name": "Zgłoś usterkę w wypożyczanym pojeździe" }, { "type_name": "Pomoc z wypożyczeniem" }, { "type_name": "Kontakt" }]);
+    const [helpTypes, setHelpType] = useState([{ "type_name": "Zgłoś błąd" }, { "type_name": "Odwołaj się od mandatu" }, { "type_name": "Zgłoś uwagi do stanu pojazdu" }, { "type_name": "Pomoc z wypożyczeniem" }, { "type_name": "Kontakt" }]);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>

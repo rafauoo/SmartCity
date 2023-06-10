@@ -64,6 +64,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         borderRadius: 8,
         textAlignVertical: 'top'
+    },
+    textHelp: {
+        color: COLORS.blue,
+        fontFamily: FONT.PoppinsLight,
+        fontSize: 16,
+        textAlign: "center",
+        marginBottom: 25,
     }
 
 });
