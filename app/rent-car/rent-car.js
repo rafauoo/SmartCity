@@ -7,6 +7,7 @@ import { supabase } from '../../lib/supabase/supabase'
 import { TextInput } from 'react-native-gesture-handler';
 import styles from './rent-car.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { fetchRentCar } from '../../hook';
 
 
 
@@ -15,10 +16,30 @@ const rentCar = () => {
     const params = useSearchParams();
     const { code, other } = params;
     const [value, onChangeText] = useState('');
-    function yesPressed() {
-        console.log('Yes Pressed')
-        let time = new Date();
-        router.push({ pathname: `/rent-car/rental/${value}`, params: { time: time, code: value } })
+    async function yesPressed() {
+        const { data, error } = await supabase.auth.refreshSession()
+        const { session, user } = data
+        const rentData = await fetchRentCar(value, session.user.id)
+        if (rentData) {
+            console.log('Yes Pressed')
+            console.log('Car rented')
+            console.log(rentData.insertedRentHour)
+            router.push({
+                pathname: `/rent-car/rental/${rentData.rental_id.rental_id}`,
+                params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id }
+            })
+        }
+        else {
+            console.log("Car not available")
+            Alert.alert('Błąd', 'Nie można wypożyczyć samochodu o tym numerze', [
+                {
+                    text: 'Ok',
+                    onPress: () => { },
+                    style: 'default',
+                },
+            ],
+                { cancelable: true })
+        }
 
     }
     useEffect(() => {

@@ -10,7 +10,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
-import { fetchBikeReturn } from '../../../hook';
+import { fetchCarReturn } from '../../../hook';
 
 const CarRental = () => {
     const [seconds, setSeconds] = useState(0);
@@ -53,7 +53,18 @@ const CarRental = () => {
                 <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
-                <TouchableOpacity style={styles.buttonReturn} onPress={() => { router.push(`/rent-car/rent-car`) }}>
+                <TouchableOpacity style={styles.buttonReturn} onPress={async () => {
+                    const returnedProperly = await fetchCarReturn(params.rental_id, params.code)
+                    console.log(returnedProperly)
+                    if (returnedProperly)
+                        router.push({
+                            pathname: `/rent-car/notActiveRental/${params.rental_id}`,
+                            params: { time_returned: returnedProperly, code: params.code, rental_id: params.rental_id }
+                        })
+                    else {
+                        Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem samochodu')
+                    }
+                }}>
                     <Text style={styles.buttonReturnText}>Zwróć samochód</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>

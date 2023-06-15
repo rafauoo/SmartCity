@@ -49,7 +49,7 @@ const CarRental = () => {
             }} />
 
             <View style={styles.carImgContainer}>
-                <Image source={images.carImg} style={styles.carImg}></Image>
+                <Image source={images.bikeImg} style={styles.carImg}></Image>
                 <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
