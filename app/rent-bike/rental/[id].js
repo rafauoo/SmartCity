@@ -35,7 +35,7 @@ const CarRental = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/rent-bike/rent-list')}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -57,15 +57,17 @@ const CarRental = () => {
                     const returnedProperly = await fetchBikeReturn(params.rental_id, params.code)
                     console.log(returnedProperly)
                     if (returnedProperly)
-                        router.push({ pathname: `/rent-bike/notActiveRental/${params.rental_id}`,
-                        params: {time_returned: returnedProperly, code: params.code, rental_id: params.rental_id}})
+                        router.push({
+                            pathname: `/rent-bike/notActiveRental/${params.rental_id}`,
+                            params: { time_returned: returnedProperly, code: params.code, rental_id: params.rental_id }
+                        })
                     else {
                         Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem roweru')
                     }
                 }}>
                     <Text style={styles.buttonReturnText}>Zwróć rower</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonHelp}>
+                <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>
                     <Text style={styles.buttonHelpText}>Pomoc</Text>
                 </TouchableOpacity>
             </View>
