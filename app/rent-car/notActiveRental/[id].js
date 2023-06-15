@@ -37,7 +37,7 @@ const CarRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-car/rent-list') }} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -55,7 +55,7 @@ const CarRentalNotActive = () => {
                 <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
-                <TouchableOpacity style={styles.buttonHelp}>
+                <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>
                     <Text style={styles.buttonHelpText}>Pomoc</Text>
                 </TouchableOpacity>
             </View>

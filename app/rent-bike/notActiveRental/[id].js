@@ -28,8 +28,8 @@ const BikeRentalNotActive = () => {
     function msToMinutesSeconds(time) {
         sec = Math.ceil(time / 1000);
         minutes = Math.floor(sec / 60);
-        seconds = sec - minutes*60
-        return {"minutes": minutes, "seconds": seconds}
+        seconds = sec - minutes * 60
+        return { "minutes": minutes, "seconds": seconds }
     }
     const zeroPad = (num, places) => String(num).padStart(places, '0')
     return (
@@ -37,7 +37,7 @@ const BikeRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => {router.push('/rent-bike/rent-list')}}/>
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -55,7 +55,7 @@ const BikeRentalNotActive = () => {
                 <Text style={styles.bikeNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
-                <TouchableOpacity style={styles.buttonHelp}>
+                <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>
                     <Text style={styles.buttonHelpText}>Pomoc</Text>
                 </TouchableOpacity>
             </View>
@@ -63,40 +63,40 @@ const BikeRentalNotActive = () => {
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoTimeText}>Czas wypożyczenia</Text>
                     <Text style={styles.infoTime}>
-                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).minutes,2)}:
-                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).seconds,2)}
+                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).minutes, 2)}:
+                        {zeroPad(msToMinutesSeconds(calculateRentalTime(params.time_rented, params.time_returned)).seconds, 2)}
                     </Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoDateText}>Data wypożyczenia</Text>
                     <Text style={styles.infoDate}>
-                        {zeroPad(getDate(params.time_rented).getDate(),2)}.
-                        {zeroPad(getDate(params.time_rented).getMonth()+1,2)}.
-                        {zeroPad(getDate(params.time_rented).getFullYear(),2)}
+                        {zeroPad(getDate(params.time_rented).getDate(), 2)}.
+                        {zeroPad(getDate(params.time_rented).getMonth() + 1, 2)}.
+                        {zeroPad(getDate(params.time_rented).getFullYear(), 2)}
                     </Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoDateText}>Godzina wypożyczenia</Text>
                     <Text style={styles.infoDate}>
-                        {zeroPad(getDate(params.time_rented).getHours(),2)}:
-                        {zeroPad(getDate(params.time_rented).getMinutes(),2)}:
-                        {zeroPad(getDate(params.time_rented).getSeconds(),2)}
+                        {zeroPad(getDate(params.time_rented).getHours(), 2)}:
+                        {zeroPad(getDate(params.time_rented).getMinutes(), 2)}:
+                        {zeroPad(getDate(params.time_rented).getSeconds(), 2)}
                     </Text>
                 </View>
                 <View style={styles.infoTimeContainer}>
                     <Text style={styles.infoDateText}>Data zwrotu</Text>
                     <Text style={styles.infoDate}>
-                        {zeroPad(getDate(params.time_returned).getDate(),2)}.
-                        {zeroPad(getDate(params.time_returned).getMonth()+1,2)}.
-                        {zeroPad(getDate(params.time_returned).getFullYear(),2)}
+                        {zeroPad(getDate(params.time_returned).getDate(), 2)}.
+                        {zeroPad(getDate(params.time_returned).getMonth() + 1, 2)}.
+                        {zeroPad(getDate(params.time_returned).getFullYear(), 2)}
                     </Text>
                 </View>
                 <View style={styles.infoHourContainer}>
                     <Text style={styles.infoDateText}>Godzina zwrotu</Text>
                     <Text style={styles.infoDate}>
-                        {zeroPad(getDate(params.time_returned).getHours(),2)}:
-                        {zeroPad(getDate(params.time_returned).getMinutes(),2)}:
-                        {zeroPad(getDate(params.time_returned).getSeconds(),2)}
+                        {zeroPad(getDate(params.time_returned).getHours(), 2)}:
+                        {zeroPad(getDate(params.time_returned).getMinutes(), 2)}:
+                        {zeroPad(getDate(params.time_returned).getSeconds(), 2)}
                     </Text>
                 </View>
                 <Text style={styles.infoDateText}>ID Wypożyczenia: {params.rental_id}</Text>

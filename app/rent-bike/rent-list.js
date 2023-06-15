@@ -30,12 +30,12 @@ const rentList = () => {
             setSession(session)
             if (session) {
                 if (!data) {
-                const fetchData = async () => {
-                  const rentals = await fetchRentals(session.user.id);
-                  setData(rentals);
-                };
-                fetchData();
-              }
+                    const fetchData = async () => {
+                        const rentals = await fetchRentals(session.user.id);
+                        setData(rentals);
+                    };
+                    fetchData();
+                }
             }
         })
         setLoading(false)
@@ -67,57 +67,65 @@ const rentList = () => {
                 <View style={styles.listContainer}>
                     {data && data.slice(0).reverse().map((item, index) => (
                         <View key={index}>
-                        {item.time_returned ?      
-                            <View style={styles.rentBox}>
-                                <TouchableOpacity onPress={() => {
-                                        router.push({ pathname: `/rent-bike/notActiveRental/${item.rental_id}`,
-                                        params: {time_rented: item.time_rented, 
-                                                time_returned: item.time_returned, 
-                                                code: item.bike_id, 
-                                                rental_id: item.rental_id}})}
+                            {item.time_returned ?
+                                <View style={styles.rentBox}>
+                                    <TouchableOpacity onPress={() => {
+                                        router.push({
+                                            pathname: `/rent-bike/notActiveRental/${item.rental_id}`,
+                                            params: {
+                                                time_rented: item.time_rented,
+                                                time_returned: item.time_returned,
+                                                code: item.bike_id,
+                                                rental_id: item.rental_id
+                                            }
+                                        })
+                                    }
                                     }>
-                                    <Image source={images.bikeImg} style={styles.bikeImg}></Image>
-                                    <Text style={styles.objectID}>{item.bike_id}</Text>
-                                    <Text style={styles.rentalID}>ID Wypożyczenia: {item.rental_id}</Text>
-                                    <Text style={styles.time}>
-                                        {zeroPad(getDate(item.time_rented).getDate(),2)}.
-                                        {zeroPad(getDate(item.time_rented).getMonth()+1,2)}.
-                                        {zeroPad(getDate(item.time_rented).getFullYear(),2)} &nbsp; 
-                                        {zeroPad(getDate(item.time_rented).getHours(),2)}:
-                                        {zeroPad(getDate(item.time_rented).getMinutes(),2)}:
-                                        {zeroPad(getDate(item.time_rented).getSeconds(),2)}
-                                    </Text>
-                                    <Text style={styles.time}>
-                                        {zeroPad(getDate(item.time_returned).getDate(),2)}.
-                                        {zeroPad(getDate(item.time_returned).getMonth()+1,2)}.
-                                        {zeroPad(getDate(item.time_returned).getFullYear(),2)} &nbsp; 
-                                        {zeroPad(getDate(item.time_returned).getHours(),2)}:
-                                        {zeroPad(getDate(item.time_returned).getMinutes(),2)}:
-                                        {zeroPad(getDate(item.time_returned).getSeconds(),2)}
-                                    </Text>
-                                </TouchableOpacity> 
-                            </View>
-                            :
-                            <View style={styles.activeRentBox}>
-                                <TouchableOpacity onPress={() => {
-                                    const date_rented = new Date(item.time_rented)
-                                    router.push({ pathname: `/rent-bike/rental/${item.rental_id}`,
-                                    params: {time: date_rented, code: item.bike_id, rental_id: item.rental_id}})}
-                                }>
-                                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
-                                <Text style={styles.objectID}>{item.bike_id}</Text>
-                                <Text style={styles.time}>
-                                    {zeroPad(getDate(item.time_rented).getDate(),2)}.
-                                    {zeroPad(getDate(item.time_rented).getMonth()+1,2)}.
-                                    {zeroPad(getDate(item.time_rented).getFullYear(),2)} &nbsp; 
-                                    {zeroPad(getDate(item.time_rented).getHours(),2)}:
-                                    {zeroPad(getDate(item.time_rented).getMinutes(),2)}:
-                                    {zeroPad(getDate(item.time_rented).getSeconds(),2)}
-                                </Text>
-                                <Text style={styles.active}>WYPOŻYCZENIE W TRAKCIE</Text>
-                                </TouchableOpacity>
-                            </View>
-                        }
+                                        <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                        <Text style={styles.objectID}>{item.bike_id}</Text>
+                                        <Text style={styles.rentalID}>ID Wypożyczenia: {item.rental_id}</Text>
+                                        <Text style={styles.time}>
+                                            {zeroPad(getDate(item.time_rented).getDate(), 2)}.
+                                            {zeroPad(getDate(item.time_rented).getMonth() + 1, 2)}.
+                                            {zeroPad(getDate(item.time_rented).getFullYear(), 2)} &nbsp;
+                                            {zeroPad(getDate(item.time_rented).getHours(), 2)}:
+                                            {zeroPad(getDate(item.time_rented).getMinutes(), 2)}:
+                                            {zeroPad(getDate(item.time_rented).getSeconds(), 2)}
+                                        </Text>
+                                        <Text style={styles.time}>
+                                            {zeroPad(getDate(item.time_returned).getDate(), 2)}.
+                                            {zeroPad(getDate(item.time_returned).getMonth() + 1, 2)}.
+                                            {zeroPad(getDate(item.time_returned).getFullYear(), 2)} &nbsp;
+                                            {zeroPad(getDate(item.time_returned).getHours(), 2)}:
+                                            {zeroPad(getDate(item.time_returned).getMinutes(), 2)}:
+                                            {zeroPad(getDate(item.time_returned).getSeconds(), 2)}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <View style={styles.activeRentBox}>
+                                    <TouchableOpacity onPress={() => {
+                                        const date_rented = new Date(item.time_rented)
+                                        router.push({
+                                            pathname: `/rent-bike/rental/${item.rental_id}`,
+                                            params: { time: date_rented, code: item.bike_id, rental_id: item.rental_id }
+                                        })
+                                    }
+                                    }>
+                                        <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                        <Text style={styles.objectID}>{item.bike_id}</Text>
+                                        <Text style={styles.time}>
+                                            {zeroPad(getDate(item.time_rented).getDate(), 2)}.
+                                            {zeroPad(getDate(item.time_rented).getMonth() + 1, 2)}.
+                                            {zeroPad(getDate(item.time_rented).getFullYear(), 2)} &nbsp;
+                                            {zeroPad(getDate(item.time_rented).getHours(), 2)}:
+                                            {zeroPad(getDate(item.time_rented).getMinutes(), 2)}:
+                                            {zeroPad(getDate(item.time_rented).getSeconds(), 2)}
+                                        </Text>
+                                        <Text style={styles.active}>WYPOŻYCZENIE W TRAKCIE</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            }
                         </View>
                     ))}
                 </View>

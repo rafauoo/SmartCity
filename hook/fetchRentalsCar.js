@@ -18,7 +18,7 @@ async function getCarID(city_service_object_id) {
     return data;
 }
 
-async function fetchBikeData(rental_data) {
+async function fetchCarData(rental_data) {
     console.log(rental_data)
     const car_id = await getCarID(rental_data.city_service_object_id)
     const time_rented = await getCarTime('godzina wypożyczenia samochodu', rental_data);
