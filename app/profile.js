@@ -42,6 +42,25 @@ const Profile = () => {
                     }
                 }} />
                 <ProfilePage session={session} />
+                <TouchableOpacity onPress={() => { router.push('/documents') }} style={{
+                    backgroundColor: COLORS.blue,
+                    marginTop: 40,
+                    width: 250,
+                    height: 50,
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    borderRadius: 15,
+                    borderColor: COLORS.blue,
+                    borderWidth: 2,
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}>
+                    <Text style={{
+                        fontSize: 20,
+                        fontFamily: FONT.PoppinsBold,
+                        color: COLORS.white
+                    }}>Dodaj dokument</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => { supabase.auth.signOut(); setLoggedIn(false) }} style={{
                     backgroundColor: COLORS.red,
                     marginTop: 40,
