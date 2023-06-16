@@ -40,7 +40,7 @@ const documenter = ({}) => {
                         key={document.type_name}
                         onPress={() => {
                             router.push({
-                                pathname: "/documents/add",
+                                pathname: "/documents/documents",
                                 params: {type: document.type_name},
                             })
                         }}
