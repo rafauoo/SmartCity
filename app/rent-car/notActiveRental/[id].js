@@ -9,9 +9,9 @@ import { TextInput } from 'react-native-gesture-handler';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
-import styles from './rentalCard.styles'
+import styles from './rentalCard.styles';
 
-const BikeRentalNotActive = () => {
+const CarRentalNotActive = () => {
     const params = useSearchParams();
     const router = useRouter();
     useEffect(() => {
@@ -37,7 +37,7 @@ const BikeRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -50,9 +50,9 @@ const BikeRentalNotActive = () => {
                 },
             }} />
 
-            <View style={styles.bikeImgContainer}>
-                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
-                <Text style={styles.bikeNumber}>{params.code}</Text>
+            <View style={styles.carImgContainer}>
+                <Image source={images.carImg} style={styles.carImg}></Image>
+                <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
                 <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>
@@ -105,4 +105,4 @@ const BikeRentalNotActive = () => {
     )
 }
 
-export default BikeRentalNotActive;
+export default CarRentalNotActive;
