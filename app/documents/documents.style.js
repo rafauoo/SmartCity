@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
     textHeader: {
-        //textAlign: left, dac na lewo jakos bo zle wyglada
         color: COLORS.blue,
         fontFamily: FONT.PoppinsBold,
         fontSize: 20,
@@ -71,8 +70,46 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
         marginBottom: 25,
-    }
-
+    },
+    acceptText: {
+        fontSize: 20,
+        fontFamily: FONT.PoppinsBold,
+        color: COLORS.white,
+    },
+    numberContainer: {
+        alignItems: 'center'
+    },
+    numberText: {
+        marginTop: 40,
+        fontSize: 30,
+        fontFamily: FONT.PoppinsLight,
+        color: COLORS.blue
+    },
+    numberInput: {
+        marginTop: 30,
+        alignSelf: 'center',
+        fontSize: 50,
+        width: 187,
+        letterSpacing: 1,
+        marginLeft: 0,
+        color: COLORS.blue
+    },
+    acceptButton: {
+        backgroundColor: COLORS.blue,
+        marginTop: 30,
+        width: 150,
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    acceptText: {
+        fontSize: 20,
+        fontFamily: FONT.PoppinsBold,
+        color: COLORS.white,
+    },
 });
 
 export default styles;

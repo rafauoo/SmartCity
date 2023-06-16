@@ -17,7 +17,6 @@ import { supabase } from '../../lib/supabase/supabase';
 const document = ({}) => {
     const router = useRouter();
     const { type } = useSearchParams();
-    const [sendDate, setSendDate] = useState();
     const [documentType, setDocumentType] = useState('');
     const [valueType, setValueType] = useState('');
     const [idNumber, setIdNumber] = useState('');
@@ -38,7 +37,6 @@ const document = ({}) => {
                 { cancelable: true })
         }
         else {
-            console.log("Car not available")
             Alert.alert('Błąd', 'Wystąpił nieoczekiwany błąd przy próbie dodania. Spróbuj ponownie później', [
                 {
                     text: 'Ok',
@@ -94,8 +92,8 @@ const document = ({}) => {
                         />
                     </View>
                     <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                        setDocumentType('Dowód osobisty');
-                        setValueType('Numer dowodu');
+                        setDocumentType('dowód osobisty');
+                        setValueType('numer dowodu');
                         if (value) {
                             Alert.alert('Dodanie dowodu', `Czy numer dowodu: ${value} jest prawidłowy?`,
                                 [
@@ -115,7 +113,7 @@ const document = ({}) => {
                     }}>
                         <Text style={styles.acceptText}>Dodaj</Text>
                     </TouchableOpacity>
-                    </ScrollView>
+                </ScrollView>
             </SafeAreaView>
         )
     else if (type == "Prawo jazdy")
@@ -142,34 +140,43 @@ const document = ({}) => {
                     }}
                 />
 
-                <ScrollView contentContainerStyle={styles.root}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{type}</Text>
-                        {sendDate && (
-                            <Text style={[styles.text, styles.textSmall]}>
-                                Dodano dokument {"\n" + sendDate.toLocaleString()}
-                            </Text>
-                        )}
+                <ScrollView>
+                    <View style={styles.numberContainer}>
+                        <Text style={styles.numberText}>Wprowadź Twój numer prawa jazdy</Text>
+                        <TextInput
+                            editable
+                            keyboardType='default'
+                            numberOfLines={1}
+                            maxLength={7}
+                            placeholder={"000000000"}
+                            onChangeText={number => setIdNumber(number)}
+                            value={value}
+                            style={styles.numberInput}
+                        />
                     </View>
-
-                    {!sendDate && (
-                        <>
-                            <Text style={styles.textHeader}> NR PRAWA JAZDY </Text>
-                            <TextInput 
-                                style={styles.header}>
-                                placeholder="Wpisz numer prawa jazdy"
-                                onChangeText={newIdNumber => setIdNumber(newIdNumber)}
-                                defaultValue={idNumber}
-                            </TextInput>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => setSendDate(new Date())}
-                            >
-                                <Text>Wyślij</Text>
-                            </TouchableOpacity>
-                        </>
-                    )}
-                </ScrollView>
+                    <TouchableOpacity style={styles.acceptButton} onPress={() => {
+                        setDocumentType('prawo jazdy');
+                        setValueType('numer prawa jazdy');
+                        if (value) {
+                            Alert.alert('Dodanie prawa jazdy', `Czy numer prawa jazdy: ${value} jest prawidłowy?`,
+                                [
+                                    {
+                                        text: 'Nie',
+                                        onPress: () => { },
+                                        style: 'destructive'
+                                    },
+                                    {
+                                        text: 'Tak',
+                                        onPress: () => yesPressed(),
+                                        style: 'default',
+                                    },
+                                ],
+                                { cancelable: true })
+                        }
+                    }}>
+                        <Text style={styles.acceptText}>Dodaj</Text>
+                    </TouchableOpacity>
+                    </ScrollView>
             </SafeAreaView>
         );
 };
