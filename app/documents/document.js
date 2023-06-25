@@ -27,9 +27,7 @@ const document = ({}) => {
     async function yesPressed() {
         const { data, error } = await supabase.auth.refreshSession()
         const { session, user } = data
-        console.log(session.user.id)
-        // const rentData = await fetchDocumentAdd(session.user.id, documentType, valueType, value )
-        const rentData = await fetchDocumentAdd(session.user.id)
+        const rentData = await fetchDocumentAdd(session.user.id, documentType, valueType, value )
         if (rentData) {
             Alert.alert('Dodano dokument', 'Dokument został dodany pomyślnie', [
                 {
