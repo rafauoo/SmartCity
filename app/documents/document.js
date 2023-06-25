@@ -6,13 +6,14 @@ import {
     TextInput,
     View,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Stack, useRouter, useSearchParams } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
 import styles from "./documents.style";
 import { fetchDocumentAdd } from '../../hook';
 import { supabase } from '../../lib/supabase/supabase';
+import { Alert } from "react-native";
 
 const document = ({}) => {
     const router = useRouter();
@@ -20,12 +21,15 @@ const document = ({}) => {
     const [documentType, setDocumentType] = useState('');
     const [valueType, setValueType] = useState('');
     const [idNumber, setIdNumber] = useState('');
+    const [value, onChangeText] = useState('');
     const params = useSearchParams();
     const { code, other } = params;
     async function yesPressed() {
         const { data, error } = await supabase.auth.refreshSession()
         const { session, user } = data
-        const rentData = await fetchDocumentAdd(session.user.id, documentType, idNumber, valueType)
+        console.log(session.user.id)
+        // const rentData = await fetchDocumentAdd(session.user.id, documentType, valueType, value )
+        const rentData = await fetchDocumentAdd(session.user.id)
         if (rentData) {
             Alert.alert('Dodano dokument', 'Dokument został dodany pomyślnie', [
                 {
@@ -84,9 +88,9 @@ const document = ({}) => {
                             editable
                             keyboardType='default'
                             numberOfLines={1}
-                            maxLength={7}
+                            maxLength={9}
                             placeholder={"000000000"}
-                            onChangeText={number => setIdNumber(number)}
+                            onChangeText={number => onChangeText(number)}
                             value={value}
                             style={styles.numberInput}
                         />
@@ -149,7 +153,7 @@ const document = ({}) => {
                             numberOfLines={1}
                             maxLength={7}
                             placeholder={"000000000"}
-                            onChangeText={number => setIdNumber(number)}
+                            onChangeText={number => onChangeText(number)}
                             value={value}
                             style={styles.numberInput}
                         />
