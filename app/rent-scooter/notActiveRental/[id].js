@@ -11,7 +11,7 @@ import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
 
-const BikeRentalNotActive = () => {
+const ScooterRentalNotActive = () => {
     const params = useSearchParams();
     const router = useRouter();
     useEffect(() => {
@@ -40,7 +40,7 @@ const BikeRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-scooter/rent-list') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -54,7 +54,7 @@ const BikeRentalNotActive = () => {
             }} />
 
             <View style={styles.bikeImgContainer}>
-                <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                <Image source={images.scooterImg} style={styles.bikeImg}></Image>
                 <Text style={styles.bikeNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
@@ -108,4 +108,4 @@ const BikeRentalNotActive = () => {
     )
 }
 
-export default BikeRentalNotActive;
+export default ScooterRentalNotActive;

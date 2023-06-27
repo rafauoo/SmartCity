@@ -5,33 +5,33 @@ import { COLORS, FONT, icons } from '../../constants'
 import { TileGrid, MenuButton } from '../../components'
 import { supabase } from '../../lib/supabase/supabase'
 import { TextInput } from 'react-native-gesture-handler';
-import styles from './rent-bike.style';
+import styles from './rent-scooter.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { fetchBikeAvailable } from '../../hook';
-import { fetchRentBike } from '../../hook';
+import { fetchScooterAvailable } from '../../hook';
+import { fetchRentScooter } from '../../hook';
 
 
 
-const rentBike = () => {
+const rentScooter = () => {
     const router = useRouter();
     const params = useSearchParams();
     const { code, other } = params;
     const [value, onChangeText] = useState('');
     async function yesPressed() {
-        const { data, error } = await supabase.auth.getSession()
-        const session = data.session
-        const rentData = await fetchRentBike(value, session.user.id)
+        const { data, error } = await supabase.auth.refreshSession()
+        const { session, user } = data
+        const rentData = await fetchRentScooter(value, session.user.id)
         if (rentData)
         {
             console.log('Yes Pressed')
-            console.log('Bike rented')
+            console.log('Scooter rented')
             console.log(rentData.insertedRentHour)
-            router.push({ pathname: `/rent-bike/rental/${rentData.rental_id.rental_id}`,
+            router.push({ pathname: `/rent-scooter/rental/${rentData.rental_id.rental_id}`,
              params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id} })
         }
         else {
-            console.log("Bike not available")
-            Alert.alert('Błąd','Nie można wypożyczyć roweru o tym numerze', [
+            console.log("Scooter not available")
+            Alert.alert('Błąd','Nie można wypożyczyć hulajnogi o tym numerze', [
             {
                 text: 'Ok',
                 onPress: () => {},
@@ -67,7 +67,7 @@ const rentBike = () => {
 
             <ScrollView>
                 <View style={styles.numberContainer}>
-                    <Text style={styles.numberText}>Wprowadź numer roweru:</Text>
+                    <Text style={styles.numberText}>Wprowadź numer hulajngoi:</Text>
                     <TextInput
                         editable
                         keyboardType='numeric'
@@ -81,7 +81,7 @@ const rentBike = () => {
                 </View>
                 <TouchableOpacity style={styles.acceptButton} onPress={() => {
                     if (value) {
-                        Alert.alert('Wypożyczenie', `Czy na pewno chcesz wypożyczyć rower o numerze ${value}?`,
+                        Alert.alert('Wypożyczenie', `Czy na pewno chcesz wypożyczyć hulajnogę o numerze ${value}?`,
                             [
                                 {
                                     text: 'Nie',
@@ -100,11 +100,11 @@ const rentBike = () => {
                     <Text style={styles.acceptText}>Wypożycz</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.qrButton} onPress={() => { router.push(`/rent-bike/qr-scanner`) }}>
+                <TouchableOpacity style={styles.qrButton} onPress={() => { router.push(`/rent-scooter/qr-scanner`) }}>
                     <Text style={styles.qrText}>Użyj kodu QR</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.rentalsButton} onPress={() => router.push(`/rent-bike/rent-list`)}>
+                <TouchableOpacity style={styles.rentalsButton} onPress={() => router.push(`/rent-scooter/rent-list`)}>
                     <Text style={styles.rentalsText}>Wypożyczenia</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -112,4 +112,4 @@ const rentBike = () => {
     )
 }
 
-export default rentBike;
+export default rentScooter;

@@ -22,6 +22,9 @@ export default function TileGrid() {
                 title="Wypożycz Hulajnogę"
                 icon={icons.scooter}
                 color={COLORS.blue}
+                onPress={() => {
+                    router.push(`/rent-scooter/rent-scooter`);
+                }}
             />
             <Tile
                 title="Parking"
