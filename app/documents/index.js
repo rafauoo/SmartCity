@@ -1,4 +1,4 @@
-import { Texr, SafeAreaView, ScrollView, View, TouchableOpacity } from "react-native";
+import { Text, SafeAreaView, ScrollView, View, TouchableOpacity } from "react-native";
 import { useState, useEffect} from "react";
 import { Stack, useRouter } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
@@ -33,24 +33,25 @@ const documenter = ({}) => {
             />
 
             <ScrollView contentContainerStyle={styles.root}>
-                <Text style={styles.title}>Dodaj dokument</Text>
+                <Text style={styles.title}>Jaki dokument chcesz dodać?</Text>
                 {documentTypes.map((document) => (
+
                     < TouchableOpacity
-                        styles={styles.button}
+                        style={styles.button}
                         key={document.type_name}
-                        onPress={() => {
+                        onPress={() =>
                             router.push({
-                                pathname: "/documents/add",
-                                params: {type: document.type_name},
+                                pathname: "/documents/document",
+                                params: { type: document.type_name },
                             })
-                        }}
+                        }
                     >
                         <Text>{document.type_name}</Text>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-        </SafeAreaView>
-    );                
+        </SafeAreaView >
+    );           
 };
 
 export default documenter;

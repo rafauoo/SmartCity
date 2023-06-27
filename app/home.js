@@ -13,7 +13,7 @@ const Home = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.menu} />
+                    <MenuButton icon={icons.menu} onPress={() => {router.push('menu')}}/>
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} onPress={() => { router.push('profile') }} />
