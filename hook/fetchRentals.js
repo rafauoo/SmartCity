@@ -33,6 +33,7 @@ async function fetchRentals(userId) {
         .from('rental_object')
         .select(`*`)
         .eq('user_uuid', userId)
+        .eq('type_name', 'wypożyczenie roweru')
     if (error) {
         console.error('Wystąpił błąd podczas pobierania wypożyczeń:', error);
         return [];

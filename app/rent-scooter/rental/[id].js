@@ -10,9 +10,9 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StatusBar } from 'expo-status-bar';
 import moment, { min } from 'moment';
 import styles from './rentalCard.styles'
-import { fetchBikeReturn } from '../../../hook';
+import { fetchScooterReturn } from '../../../hook';
 
-const BikeRental = () => {
+const ScooterRental = () => {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const params = useSearchParams();
@@ -35,7 +35,7 @@ const BikeRental = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-scooter/rent-list') }} />
                 ),
                 headerRight: () => (
                     <MenuButton icon={icons.profile} />
@@ -49,32 +49,28 @@ const BikeRental = () => {
             }} />
 
             <View style={styles.carImgContainer}>
-                <Image source={images.bikeImg} style={styles.carImg}></Image>
+                <Image source={images.scooterImg} style={styles.carImg}></Image>
                 <Text style={styles.carNumber}>{params.code}</Text>
             </View>
             <View style={styles.buttonList}>
                 <TouchableOpacity style={styles.buttonReturn} onPress={async () => {
-                    const returnedProperly = await fetchBikeReturn(params.rental_id, params.code)
+                    const returnedProperly = await fetchScooterReturn(params.rental_id, params.code)
                     console.log(returnedProperly)
                     if (returnedProperly)
-                        // router.push({
-                        //     pathname: `/rent-bike/notActiveRental/${params.rental_id}`,
-                        //     params: { time_returned: returnedProperly, code: params.code, rental_id: params.rental_id }
-                        // })
-                        router.push({
-                            pathname: `/rent-bike/notActiveRental/${params.rental_id}`,
-                            params: {
-                                time_rented: startDate.toISOString(),
-                                time_returned: returnedProperly.toISOString(),
-                                code: params.code,
-                                rental_id: params.rental_id
-                            }
-                        })
+                    router.push({
+                        pathname: `/rent-scooter/notActiveRental/${params.rental_id}`,
+                        params: {
+                            time_rented: startDate.toISOString(),
+                            time_returned: returnedProperly.toISOString(),
+                            code: params.code,
+                            rental_id: params.rental_id
+                        }
+                    })
                     else {
-                        Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem roweru')
+                        Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem hulajnogi')
                     }
                 }}>
-                    <Text style={styles.buttonReturnText}>Zwróć rower</Text>
+                    <Text style={styles.buttonReturnText}>Zwróć hulajnogę</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonHelp} onPress={() => { router.push(`/help`) }}>
                     <Text style={styles.buttonHelpText}>Pomoc</Text>
@@ -100,4 +96,4 @@ const BikeRental = () => {
 
 }
 
-export default BikeRental;
+export default ScooterRental;

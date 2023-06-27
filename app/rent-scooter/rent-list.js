@@ -8,7 +8,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import styles from './rent-list.style';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { images } from '../../constants'
-import { fetchRentals } from '../../hook';
+import { fetchRentalsScooter } from '../../hook';
 
 
 
@@ -31,7 +31,7 @@ const rentList = () => {
             if (session) {
                 if (!data) {
                     const fetchData = async () => {
-                        const rentals = await fetchRentals(session.user.id);
+                        const rentals = await fetchRentalsScooter(session.user.id);
                         setData(rentals);
                     };
                     fetchData();
@@ -71,7 +71,7 @@ const rentList = () => {
                                 <View style={styles.rentBox}>
                                     <TouchableOpacity onPress={() => {
                                         router.push({
-                                            pathname: `/rent-bike/notActiveRental/${item.rental_id}`,
+                                            pathname: `/rent-scooter/notActiveRental/${item.rental_id}`,
                                             params: {
                                                 time_rented: item.time_rented,
                                                 time_returned: item.time_returned,
@@ -81,7 +81,7 @@ const rentList = () => {
                                         })
                                     }
                                     }>
-                                        <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                        <Image source={images.scooterImg} style={styles.bikeImg}></Image>
                                         <Text style={styles.objectID}>{item.bike_id}</Text>
                                         <Text style={styles.rentalID}>ID Wypożyczenia: {item.rental_id}</Text>
                                         <Text style={styles.time}>
@@ -107,12 +107,12 @@ const rentList = () => {
                                     <TouchableOpacity onPress={() => {
                                         const date_rented = new Date(item.time_rented)
                                         router.push({
-                                            pathname: `/rent-bike/rental/${item.rental_id}`,
+                                            pathname: `/rent-scooter/rental/${item.rental_id}`,
                                             params: { time: date_rented, code: item.bike_id, rental_id: item.rental_id }
                                         })
                                     }
                                     }>
-                                        <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                        <Image source={images.scooterImg} style={styles.bikeImg}></Image>
                                         <Text style={styles.objectID}>{item.bike_id}</Text>
                                         <Text style={styles.time}>
                                             {zeroPad(getDate(item.time_rented).getDate(), 2)}.
