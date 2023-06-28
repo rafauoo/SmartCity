@@ -8,6 +8,10 @@ import fetchDocumentAdd from "./fetchDocumentAdd";
 import fetchScooterReturn from "./fetchScooterReturn";
 import fetchRentScooter from "./fetchRentScooter";
 import fetchRentalsScooter from "./fetchRentalsScooter";
+import fetchTicket from "./fetchTicket";
+import fetchParkings from "./fetchParkings";
+import fetchRentParking from "./fetchRentParking";
+import fetchParkingReturn from "./fetchParkingReturn";
 
 export {
   fetchRentals,
@@ -17,5 +21,11 @@ export {
   fetchRentCar,
   fetchRentalsCar,
   fetchDocumentAdd,
-  fetchScooterReturn, fetchRentScooter, fetchRentalsScooter
+  fetchScooterReturn,
+  fetchRentScooter,
+  fetchRentalsScooter,
+  fetchTicket,
+  fetchParkings,
+  fetchRentParking,
+  fetchParkingReturn,
 };

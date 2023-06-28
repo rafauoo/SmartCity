@@ -11,6 +11,8 @@ import { Stack, useRouter, useSearchParams } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
 import styles from "./tickets.style";
+import { fetchTicket } from "../../hook";
+import { supabase } from "../../lib/supabase/supabase";
 
 const ticket = () => {
   const router = useRouter();
@@ -53,7 +55,13 @@ const ticket = () => {
         {!clipDate && (
           <TouchableOpacity
             style={styles.button}
-            onPress={() => setClipDate(new Date())}
+            onPress={async () => {
+              const { data, error } = await supabase.auth.refreshSession();
+              if (error || !data) return;
+              const { user } = data;
+              const { value } = await fetchTicket(type, user.id);
+              setClipDate(new Date(value));
+            }}
           >
             <Text>Skasuj bilet</Text>
           </TouchableOpacity>

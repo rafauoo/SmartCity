@@ -6,22 +6,37 @@ import { MenuButton } from "../../components";
 import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import styles from "./parking.style";
+import { fetchParkings } from "../../hook";
 
-const mockParkings = [
-  {
-    coords: { latitude: 52.2202777, longitude: 21.0105555 },
-    name: "Parking Politechnika Warszawska",
-    freePlaces: 21,
-  },
-];
 const parking = () => {
   const router = useRouter();
   const [location, setLocation] = useState();
+  const [parkings, setParkings] = useState([]);
+
   useEffect(() => {
     Location.requestForegroundPermissionsAsync().then(
       ({ status }) =>
         status === "granted" &&
         Location.getCurrentPositionAsync({}).then(setLocation)
+    );
+    fetchParkings().then((data) =>
+      setParkings(
+        data.map((parking) => ({
+          id: parking.service_id,
+          name: Object.values(parking.city_service_extra_data_value).find(
+            (val) => val.data_name === "nazwa parkingu miejskiego"
+          ).value,
+          coords: Object.values(parking.city_service_extra_data_value)
+            .find((val) => val.data_name === "wpółrzędne parkingu miejskiego")
+            .value.split(",")
+            .map(Number),
+          places: Number(
+            Object.values(parking.city_service_extra_data_value).find(
+              (val) => val.data_name === "pojemność parkingu miejskiego"
+            ).value
+          ),
+        }))
+      )
     );
   }, []);
 
@@ -50,7 +65,7 @@ const parking = () => {
 
       <ScrollView contentContainerStyle={styles.root}>
         <Text style={styles.title}>Wybierz parking</Text>
-        {location?.coords && (
+        {location?.coords && !!parkings.length && (
           <MapView
             initialRegion={{
               latitude: location.coords.latitude,
@@ -61,9 +76,12 @@ const parking = () => {
             style={{ width: 300, height: 300 }}
             showsUserLocation
           >
-            {mockParkings.map((parking) => (
+            {parkings.map((parking) => (
               <Marker
-                coordinate={parking.coords}
+                coordinate={{
+                  latitude: parking.coords[0],
+                  longitude: parking.coords[1],
+                }}
                 title={parking.name}
                 image={icons.parkingPin}
                 onPress={() =>
@@ -71,11 +89,12 @@ const parking = () => {
                     pathname: "/parking/parking",
                     params: {
                       parkingName: parking.name,
-                      freePlaces: parking.freePlaces,
+                      places: parking.places,
+                      id: parking.id,
                     },
                   })
                 }
-                key={parking.name}
+                key={parking.id}
               />
             ))}
           </MapView>

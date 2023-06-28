@@ -18,7 +18,7 @@ async function fetchDocumentAdd(userId, documentType, valueType, value) {
 async function insertDocumentObject(userId, documentType) {
   const { error, data } = await supabase
     .from("document_object")
-    .insert([{ type_name: documentType, user_id: Number(userId) }])
+    .insert([{ type_name: documentType, user_uuid: userId }])
     .select("document_id")
     .single();
   if (error) return false;
