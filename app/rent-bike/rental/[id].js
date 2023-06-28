@@ -37,9 +37,7 @@ const BikeRental = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-bike/rent-list') }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,

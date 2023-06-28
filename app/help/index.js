@@ -23,7 +23,7 @@ const helper = ({ }) => {
                             }}
                         />
                     ),
-                    headerRight: () => <MenuButton icon={icons.profile} />,
+
                     headerTitle: "Smart City",
                     headerTitleStyle: {
                         fontFamily: FONT.PoppinsBold,

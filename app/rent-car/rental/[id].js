@@ -37,9 +37,6 @@ const CarRental = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,
@@ -57,15 +54,15 @@ const CarRental = () => {
                     const returnedProperly = await fetchCarReturn(params.rental_id, params.code)
                     console.log(returnedProperly)
                     if (returnedProperly)
-                    router.push({
-                        pathname: `/rent-car/notActiveRental/${params.rental_id}`,
-                        params: {
-                            time_rented: startDate.toISOString(),
-                            time_returned: returnedProperly.toISOString(),
-                            code: params.code,
-                            rental_id: params.rental_id
-                        }
-                    })
+                        router.push({
+                            pathname: `/rent-car/notActiveRental/${params.rental_id}`,
+                            params: {
+                                time_rented: startDate.toISOString(),
+                                time_returned: returnedProperly.toISOString(),
+                                code: params.code,
+                                rental_id: params.rental_id
+                            }
+                        })
                     else {
                         Alert.alert('Błąd', 'Wystąpił błąd ze zwrotem samochodu')
                     }

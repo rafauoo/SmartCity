@@ -50,11 +50,9 @@ const rentList = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,
@@ -112,7 +110,7 @@ const rentList = () => {
                                         })
                                     }
                                     }>
-                                        <Image source={images.bikeImg} style={styles.bikeImg}></Image>
+                                        <Image source={images.carImg} style={styles.carImg}></Image>
                                         <Text style={styles.objectID}>{item.car_id}</Text>
                                         <Text style={styles.time}>
                                             {zeroPad(getDate(item.time_rented).getDate(), 2)}.

@@ -15,7 +15,10 @@ const CarRentalNotActive = () => {
     const params = useSearchParams();
     const router = useRouter();
     useEffect(() => {
-
+        console.log(params.time_rented)
+        console.log(params.time_returned)
+        console.log(params.code)
+        console.log(params.rental_id)
     }, [params])
     function getDate(date) {
         const dateObject = new Date(date);
@@ -37,10 +40,7 @@ const CarRentalNotActive = () => {
             <Stack.Screen options={{
                 headerStyle: { backgroundColor: COLORS.white },
                 headerLeft: () => (
-                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/home') }} />
-                ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
+                    <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-car/rent-list') }} />
                 ),
                 headerTitle: "Smart City",
                 headerTitleStyle: {
