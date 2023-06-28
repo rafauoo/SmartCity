@@ -7,7 +7,7 @@ import styles from "./documents.style";
 
 const documenter = ({}) => {
     const router = useRouter();
-    const [documentTypes, setDocumentType] = useState([{"type_name": "Dowód osobisty"}, {"type_name": "Prawo jazdy"}]);
+    const [documentTypes, setDocumentType] = useState([{"type_name": "Dowód osobisty"}, {"type_name": "Prawo jazdy"}, {"type_name": "Karta dużej rodziny"}, {"type_name": "Paszport"}]);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>

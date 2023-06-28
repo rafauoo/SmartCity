@@ -196,10 +196,150 @@ const document = ({}) => {
               }
             }}
           >
-            <Text style={styles.acceptText}>Dodaj</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </SafeAreaView>
+              <Text style={styles.acceptText}>Dodaj</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
+      );
+    else if (type == "Karta dużej rodziny")
+      return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
+          <Stack.Screen
+            options={{
+              headerStyle: { backgroundColor: COLORS.white },
+              headerLeft: () => (
+                <MenuButton
+                  icon={icons.backArrow}
+                  onPress={() => {
+                    router.back();
+                  }}
+                />
+              ),
+              headerRight: () => <MenuButton icon={icons.profile} />,
+              headerTitle: "Smart City",
+              headerTitleStyle: {
+                fontFamily: FONT.PoppinsBold,
+                fontSize: 22,
+                color: COLORS.blue,
+              },
+            }}
+          />
+
+          <ScrollView>
+            <View style={styles.numberContainer}>
+              <Text style={styles.numberText}>
+                Wprowadź Twój numer KDR
+              </Text>
+              <TextInput
+                editable
+                keyboardType="default"
+                numberOfLines={1}
+                maxLength={7}
+                placeholder={"000000000"}
+                onChangeText={(number) => onChangeText(number)}
+                value={value}
+                style={styles.numberInput}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.acceptButton}
+              onPress={() => {
+                if (value) {
+                  Alert.alert(
+                    "Dodanie Karty Dużej Rodziny",
+                    `Czy numer KDR: ${value} jest prawidłowy?`,
+                    [
+                      {
+                        text: "Nie",
+                        onPress: () => {},
+                        style: "destructive",
+                      },
+                      {
+                        text: "Tak",
+                        onPress: () =>
+                          yesPressed("numer karty dużej rodziny", "karta dużej rodziny"),
+                        style: "default",
+                      },
+                    ],
+                    { cancelable: true }
+                  );
+                }
+              }}
+            >
+              <Text style={styles.acceptText}>Dodaj</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
+    );
+    else if (type == "Paszport")
+      return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
+          <Stack.Screen
+            options={{
+              headerStyle: { backgroundColor: COLORS.white },
+              headerLeft: () => (
+                <MenuButton
+                  icon={icons.backArrow}
+                  onPress={() => {
+                    router.back();
+                  }}
+                />
+              ),
+              headerRight: () => <MenuButton icon={icons.profile} />,
+              headerTitle: "Smart City",
+              headerTitleStyle: {
+                fontFamily: FONT.PoppinsBold,
+                fontSize: 22,
+                color: COLORS.blue,
+              },
+            }}
+          />
+
+          <ScrollView>
+            <View style={styles.numberContainer}>
+              <Text style={styles.numberText}>
+                Wprowadź Twój numer paszportu
+              </Text>
+              <TextInput
+                editable
+                keyboardType="default"
+                numberOfLines={1}
+                maxLength={7}
+                placeholder={"000000000"}
+                onChangeText={(number) => onChangeText(number)}
+                value={value}
+                style={styles.numberInput}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.acceptButton}
+              onPress={() => {
+                if (value) {
+                  Alert.alert(
+                    "Dodanie Paszportu",
+                    `Czy numer Paszportu: ${value} jest prawidłowy?`,
+                    [
+                      {
+                        text: "Nie",
+                        onPress: () => {},
+                        style: "destructive",
+                      },
+                      {
+                        text: "Tak",
+                        onPress: () =>
+                          yesPressed("numer paszportu", "paszport"),
+                        style: "default",
+                      },
+                    ],
+                    { cancelable: true }
+                  );
+                }
+              }}
+            >
+              <Text style={styles.acceptText}>Dodaj</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
     );
 };
 
