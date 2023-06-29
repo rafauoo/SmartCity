@@ -1,13 +1,13 @@
 import { Text, SafeAreaView, ScrollView, View, TouchableOpacity } from "react-native";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
 import { COLORS, FONT, icons } from "../../constants";
 import { MenuButton } from "../../components";
 import styles from "./documents.style";
 
-const documenter = ({}) => {
+const documenter = ({ }) => {
     const router = useRouter();
-    const [documentTypes, setDocumentType] = useState([{"type_name": "Dowód osobisty"}, {"type_name": "Prawo jazdy"}, {"type_name": "Karta dużej rodziny"}, {"type_name": "Paszport"}]);
+    const [documentTypes, setDocumentType] = useState([{ "type_name": "Dowód osobisty" }, { "type_name": "Prawo jazdy" }, { "type_name": "Karta dużej rodziny" }, { "type_name": "Paszport" }]);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#e8e3e3" }}>
@@ -22,7 +22,7 @@ const documenter = ({}) => {
                             }}
                         />
                     ),
-                    headerRight: () => <MenuButton icon={icons.profile} />,
+
                     headerTitle: "Smart City",
                     headerTitleStyle: {
                         fontFamily: FONT.PoppinsBold,
@@ -51,7 +51,7 @@ const documenter = ({}) => {
                 ))}
             </ScrollView>
         </SafeAreaView >
-    );           
+    );
 };
 
 export default documenter;
