@@ -21,24 +21,25 @@ const rentScooter = () => {
         const { data, error } = await supabase.auth.refreshSession()
         const { session, user } = data
         const rentData = await fetchRentScooter(value, session.user.id)
-        if (rentData)
-        {
+        if (rentData) {
             console.log('Yes Pressed')
             console.log('Scooter rented')
             console.log(rentData.insertedRentHour)
-            router.push({ pathname: `/rent-scooter/rental/${rentData.rental_id.rental_id}`,
-             params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id} })
+            router.push({
+                pathname: `/rent-scooter/rental/${rentData.rental_id.rental_id}`,
+                params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id }
+            })
         }
         else {
             console.log("Scooter not available")
-            Alert.alert('Błąd','Nie można wypożyczyć hulajnogi o tym numerze', [
-            {
-                text: 'Ok',
-                onPress: () => {},
-                style: 'default',
-            },
-        ],
-        { cancelable: true })
+            Alert.alert('Błąd', 'Nie można wypożyczyć hulajnogi o tym numerze', [
+                {
+                    text: 'Ok',
+                    onPress: () => { },
+                    style: 'default',
+                },
+            ],
+                { cancelable: true })
         }
 
     }
@@ -54,9 +55,7 @@ const rentScooter = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,

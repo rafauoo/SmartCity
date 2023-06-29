@@ -54,9 +54,7 @@ const rentCar = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,

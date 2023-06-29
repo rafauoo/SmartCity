@@ -30,7 +30,7 @@ const tickets = ({ }) => {
                             }}
                         />
                     ),
-                    headerRight: () => <MenuButton icon={icons.profile} />,
+
                     headerTitle: "Smart City",
                     headerTitleStyle: {
                         fontFamily: FONT.PoppinsBold,

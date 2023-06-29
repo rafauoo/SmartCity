@@ -42,9 +42,7 @@ const ScooterRentalNotActive = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.push('/rent-scooter/rent-list') }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,

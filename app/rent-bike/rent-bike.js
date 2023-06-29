@@ -21,24 +21,25 @@ const rentBike = () => {
         const { data, error } = await supabase.auth.getSession()
         const session = data.session
         const rentData = await fetchRentBike(value, session.user.id)
-        if (rentData)
-        {
+        if (rentData) {
             console.log('Yes Pressed')
             console.log('Bike rented')
             console.log(rentData.insertedRentHour)
-            router.push({ pathname: `/rent-bike/rental/${rentData.rental_id.rental_id}`,
-             params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id} })
+            router.push({
+                pathname: `/rent-bike/rental/${rentData.rental_id.rental_id}`,
+                params: { time: rentData.insertedRentHour, code: value, rental_id: rentData.rental_id.rental_id }
+            })
         }
         else {
             console.log("Bike not available")
-            Alert.alert('Błąd','Nie można wypożyczyć roweru o tym numerze', [
-            {
-                text: 'Ok',
-                onPress: () => {},
-                style: 'default',
-            },
-        ],
-        { cancelable: true })
+            Alert.alert('Błąd', 'Nie można wypożyczyć roweru o tym numerze', [
+                {
+                    text: 'Ok',
+                    onPress: () => { },
+                    style: 'default',
+                },
+            ],
+                { cancelable: true })
         }
 
     }
@@ -54,9 +55,7 @@ const rentBike = () => {
                 headerLeft: () => (
                     <MenuButton icon={icons.backArrow} onPress={() => { router.back() }} />
                 ),
-                headerRight: () => (
-                    <MenuButton icon={icons.profile} />
-                ),
+
                 headerTitle: "Smart City",
                 headerTitleStyle: {
                     fontFamily: FONT.PoppinsBold,
